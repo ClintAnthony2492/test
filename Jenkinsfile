@@ -7,7 +7,7 @@ node {
         }
 
         stage('Pylint: SW Metrics') {
-            bash '''#!/bin/bash
+            sh '''#!/bin/bash
                     echo "hello world" 
             '''
         }
