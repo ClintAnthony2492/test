@@ -1,7 +1,7 @@
-a = 1
-b = 2
-c = a + b
+A = 1
+B = 2
+C = A + B
 
-print (c)
+print(C)
 
 
