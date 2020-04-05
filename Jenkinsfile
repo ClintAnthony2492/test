@@ -6,8 +6,11 @@ node {
             git 'https://github.com/ClintAnthony2492/test'
         }
 
-        stage('Build') {
-            
+        stage('Pylint: SW Metrics') {
+            sh 
+            ''
+            python3 pylint -m test.py
+            ''
         }
 
         stage('Unit Test') {
