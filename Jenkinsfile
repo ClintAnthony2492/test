@@ -9,6 +9,7 @@ node {
         stage('Pylint: SW Metrics') {
             sh '''#!/bin/bash
                   python3 -m pylint test.py
+                  echo "pylint complete"
             '''
         }
 
