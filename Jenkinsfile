@@ -10,6 +10,7 @@ node {
             sh '''#!/bin/bash
                   ls
                   python3 add.py
+                  python3 -m pylint add.py
                   echo "pylint complete"
             '''
         }
