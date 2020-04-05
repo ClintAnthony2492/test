@@ -7,10 +7,9 @@ node {
         }
 
         stage('Pylint: SW Metrics') {
-            sh 
-            ''
-            python3 pylint -m test.py
-            ''
+            bash '''#!/bin/bash
+                    echo "hello world" 
+            '''
         }
 
         stage('Unit Test') {
