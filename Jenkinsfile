@@ -7,9 +7,7 @@ node {
         }
 
         stage('Pylint: SW Metrics') {
-            sh '''#!/bin/bash
-                  ls
-                  /Library/Frameworks/Python.framework/Versions/3.8/bin/pylint add.py
+            sh '''pylint add.py
                   echo "pylint complete"
             '''
         }
