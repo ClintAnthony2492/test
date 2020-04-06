@@ -7,7 +7,8 @@ node {
         }
 
         stage('Pylint: SW Metrics') {
-            sh '''pylint add.py
+            sh '''#!/bin/bash
+                  pylint add.py
                   echo "pylint complete"
             '''
         }
