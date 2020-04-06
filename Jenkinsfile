@@ -8,7 +8,6 @@ node {
 
         stage('Pylint: SW Metrics') {
             sh '''#!/bin/bash
-                  export PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:$PATH"
                   pylint add.py
                   echo "pylint complete"
             '''
