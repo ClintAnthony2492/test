@@ -3,7 +3,7 @@ node {
     try {
         stage('GitHub Pull') { 
             // Get Code from GitHub
-            git clean -fdx 
+            step([$class: 'WsCleanup'])
             git 'https://github.com/ClintAnthony2492/test'
         }
 
