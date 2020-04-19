@@ -3,6 +3,7 @@ node {
     try {
         stage('GitHub Pull') { 
             // Get Code from GitHub
+            git clean -fdx 
             git 'https://github.com/ClintAnthony2492/test'
         }
 
@@ -20,12 +21,10 @@ node {
             '''
             echo "Unit Test Complete"
         }
-		
 
-        stage('SW Metrics') {
-           
+        stage('HWIL') {
+            echo "Hardware in the Loop Testing complete"
         }
-
 
     } catch(err) {
         Test_Result = 'FAILED'
