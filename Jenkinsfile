@@ -14,8 +14,11 @@ node {
         }
 
         stage('Unit Test') {
+            sh '''#!/bin/bash
+                  python3 -m unittest test_add.py
+                  echo "Unittest complete"
+            '''
             echo "Unit Test Complete"
-
         }
 		
 
