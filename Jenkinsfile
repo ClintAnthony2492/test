@@ -1,5 +1,7 @@
 node {
 
+    Test_Result = 'PASS'
+
     try {
         stage('GitHub Pull') { 
             // Get Code from GitHub
