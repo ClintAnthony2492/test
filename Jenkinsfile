@@ -33,7 +33,7 @@ node {
 
     finally {
         stage('Email Notify') {
-            emailext body: 'A Test Email', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+            emailext body: 'A Test Email', recipientProviders: [[$class: 'DevelopersRecipientProvider']], subject: 'Test'
             //Jenkins by default will locate jelly script in JENKINS_HOME/email-templates
             //emailext attachLog: true, mimeType: 'text/html', body: '''${SCRIPT, template="groovy-html.template"}
             //Build artifacts can be found in:
