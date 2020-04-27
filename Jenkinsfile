@@ -26,6 +26,9 @@ node {
 
         stage('HWIL') {
             echo "Hardware in the Loop Testing complete"
+            sh '''#!/bin/bash
+                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 test1.py
+            '''
         }
 
     } catch(err) {
@@ -36,10 +39,6 @@ node {
     finally {
         stage('Email Notify') {
             emailext body: 'A Test Email', to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
-            //Jenkins by default will locate jelly script in JENKINS_HOME/email-templates
-            //emailext attachLog: true, mimeType: 'text/html', body: '''${SCRIPT, template="groovy-html.template"}
-            //Build artifacts can be found in:
-            //''' + K_EmailArtDir, subject: "DOTC 17-28 Full Automated Test - Build ${VERSION}: ${Test_Result}" , to: 'Anthony.Deguzman@L3HARRIS.com'
         }
     }
 }
