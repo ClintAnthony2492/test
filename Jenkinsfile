@@ -18,7 +18,7 @@ node {
 
         stage('Unit Test') {
             sh '''#!/bin/bash
-                  #python3 -m unittest test_add.py
+                  python3 -m unittest test_format_date.py
                   echo "Unittest complete"
             '''
             echo "Unit Test Complete"
@@ -29,6 +29,8 @@ node {
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps_v002.py
                   sleep 10
             '''
+            echo "Necessary Board Reset"
+
             echo "Hardware in the Loop Testing complete"
         }
 

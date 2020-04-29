@@ -1,12 +1,69 @@
 #import input_commands as command
 #import pyb
 import os
-
+from enum import Enum
 #command.send_command("standby")
-#pyb.LED(3).toggle()
+#pyb.LED(1).toggle()
 
 class globals:
     ttff = 0
+
+def print_header():
+    print ("\n\n-----------------------------------------------------------------------------")
+    print ("-- Post-Processing and Analysis Results--------------------------------------")
+    print ("-----------------------------------------------------------------------------\n")
+
+    print ("(Test data was parse from the first GPS Sentence after GPS had its first fix)\n")
+
+def print_closer():
+    print ("\n-----------------------------------------------------------------------------")
+    print ("-- End of Post-Processing and Analysis Results ------------------------------")
+    print ("-----------------------------------------------------------------------------\n\n")
+
+def format_date(date):
+
+    # This if state is for robustness that accomadate dates such as: 
+    # - 150520 (May 15, 2020)
+    # - 51119 (November 5, 2020)
+    date_str = str(date)
+    if len(date_str) < 6:
+        date_str = ("0" + str(date))
+
+    day = date_str[0] + date_str[1]
+    month = date_str[2] + date_str[3]
+    year = date_str[4] + date_str[5]
+
+    if month == "01":
+        month = "January"
+    elif month == "02":
+        month = "February"
+    elif month == "03":
+        month = "March"
+    elif month == "04":
+        month = "April"
+    elif month == "05":
+        month = "May"
+    elif month == "06":
+        month = "June"
+    elif month == "07":
+        month = "July"
+    elif month == "08":
+        month = "August"
+    elif month == "09":
+        month = "September"
+    elif month == "10":
+        month = "October"
+    elif month == "11":
+        month = "November"
+    elif month == "12":
+        month = "December"
+
+    if int(year) <= 20:
+        year = "20" + year
+    else :
+        year = "19" + year
+
+    return (month + " " + day + ", " + year)
 
 def get_csv_path(csv_file):
     file = ''
@@ -41,15 +98,15 @@ def pp_gpgga():
             break
         index += 1
 
-
-    print(GLOBAL_VARS.ttff)
-    print(lon)
-    print(lat)
-    print(num_of_sats)
-    print(hdop)
-    print(alt)
-    print(geoid_height)
-    print('\n\n')
+    print ("\n\n|---------- GPGGA Sentence: Satellite Status ----------|\n")
+    print(" Time to First Fix:".ljust(35) + str(GLOBAL_VARS.ttff))
+    print(" Longitude:".ljust(35) + str(lon))
+    print(" Latitude:".ljust(35) + str(lat))
+    print(" Number of Satellites Used:".ljust(35) + str(num_of_sats))
+    print(" Horizontal Dilution of Position:".ljust(35) + str(hdop))
+    print(" Altitude (m):".ljust(35) + str(alt))
+    print(" Geoid Height:".ljust(35) + str(geoid_height))
+    print ("\n|------------------------------------------------------|\n\n")
 
 def pp_gpgsa():
     data = []
@@ -68,11 +125,11 @@ def pp_gpgsa():
         if int(data[index][0]) > GLOBAL_VARS.ttff:
             fix = int(data[index][3])
             if fix == 1:
-                fix_type = "No Fix"
+                fix_type = "1 = No Fix"
             if fix == 2:
-                fix_type = "2D Fix"
+                fix_type = "2 = 2D Fix"
             if fix == 3: 
-                fix_type = "3D Fix"
+                fix_type = "3 = 3D Fix"
 
             while prn_index < 16:
                 if data[index][prn_index] == ' ':
@@ -87,18 +144,24 @@ def pp_gpgsa():
             break
         index += 1
 
-    print(fix_type)
-    print(sats)
-    print(pdop)
-    print(hdop)
-    print(vdop)
-    print('\n\n')
+    sats_str = str(sats)
+    sats_str = sats_str.replace("[", '') 
+    sats_str = sats_str.replace("]", '') 
+
+    print ("\n\n|----- GPGSA Sentence: Global Positioning System Fix Data -----|\n")
+    print(" Fix Type:".ljust(35) + str(fix_type))
+    print(" Number of Satellites in View:".ljust(35) + str(sats_str))
+    print(" Dilution of Precision:".ljust(35) + str(pdop))
+    print(" Horizontal Dilution of Precision:".ljust(35) + str(hdop))
+    print(" Vertical Dilution of Precision:".ljust(35) + str(vdop))
+    print ("\n|--------------------------------------------------------------|\n\n")
 
 def pp_gpgsv():
     data = []
     sat_info = []
     file_path = get_csv_path('GPGSV.csv')
     index = 1
+    
 
     with open(file_path,'r') as file:
         for line in file:
@@ -118,16 +181,16 @@ def pp_gpgsv():
                 break
         index += 1
 
-
-    print(num_of_sats_in_view)
     sat_index = 0;
+    print ("\n\n|----------- GPGSV Sentence: Satellites in View -----------|\n")
+    print(" Number of Satellites in View:".ljust(35) + str(num_of_sats_in_view))
     while sat_index < len(sat_info):
-        print ("Satellite PRN number: " + sat_info[sat_index])
-        print ("Azimuth (deg): " + sat_info[sat_index+1])
-        print ("Signal to Noise Ratio (SNR): " + sat_info[sat_index+2])
-        print ("Elevation (deg): " + sat_info[sat_index+3])
+        print ("\n Satellite PRN number:".ljust(35) + sat_info[sat_index])
+        print (" Azimuth (deg):".ljust(35) + sat_info[sat_index+1])
+        print (" Signal to Noise Ratio (SNR):".ljust(35) + sat_info[sat_index+2])
+        print (" Elevation (deg):".ljust(35) + sat_info[sat_index+3])
         sat_index += 4
-    print('\n\n')
+    print ("\n|----------------------------------------------------------|\n\n")
 
 def pp_gprmc():
     data = []
@@ -150,12 +213,13 @@ def pp_gprmc():
             break
         index += 1
 
-    print(lat)
-    print(lon)
-    print(speed_over_ground)
-    print(track_angle)
-    print(date)
-    print('\n\n')
+    print ("\n\n|----- GPRMC Sentence: Recommended Minimum sentence C -----|\n")
+    print(" Latitude:".ljust(35) + str(lat))
+    print(" Latitude:".ljust(35) + str(lon))
+    print(" Speed Over the Ground (knots):".ljust(35) + str(speed_over_ground))
+    print(" Track Angle (deg):".ljust(35) + str(track_angle))
+    print(" Date:".ljust(35) + format_date(date))
+    print ("\n|-----------------------------------------------------------|\n\n")
 
 def pp_gpvtg():
     data = []
@@ -176,16 +240,20 @@ def pp_gpvtg():
             break
         index += 1
 
-    print(true_track)
-    print(ground_speed_knots)
-    print(ground_speed_kph)
-    print('\n\n')
+    print ("\n\n|---- GPVTG Sentence: Track Made Good and Ground Speed -----|\n")
+    print(" True Track Made Good (deg):".ljust(35) + str(true_track))
+    print(" Ground speed (knots):".ljust(35) + str(ground_speed_knots))
+    print(" Ground speed (kph):".ljust(35) + str(ground_speed_knots))
+    print ("\n|-----------------------------------------------------------|\n\n")
 
-GLOBAL_VARS = globals()
-pp_gpgga()
-pp_gpgsa()
-pp_gpgsv()
-pp_gprmc()
-pp_gpvtg()
+if __name__ == '__main__':
+    GLOBAL_VARS = globals()
+    #print_header()
+    pp_gpgga()
+    pp_gpgsa()
+    pp_gpgsv()
+    pp_gprmc()
+    pp_gpvtg()
+    print_closer()
 
 
