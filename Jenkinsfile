@@ -63,7 +63,7 @@ node {
 
     finally {
         stage('Email Notify') {
-            emailext body: "GitHub PULL:    ${GitHub_Pull}\nPylint SW Metrics:    ${Pylint_SW_Metrics} \
+            emailext attachLog: true, body: "GitHub PULL:    ${GitHub_Pull}\nPylint SW Metrics:    ${Pylint_SW_Metrics} \
                      \nUnit Test:    ${Unit_Test} \nHWIL:    ${HWIL_Test} \nPost-Process & Analysis:    ${Post_Process}", 
                      to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
         }
