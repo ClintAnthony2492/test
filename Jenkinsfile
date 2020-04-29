@@ -16,7 +16,6 @@ node {
             step([$class: 'WsCleanup'])
             git 'https://github.com/ClintAnthony2492/test'
             GitHub_Pull = 'PASS'
-            }
         }
 
         stage('Pylint: SW Metrics') {
