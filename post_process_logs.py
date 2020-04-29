@@ -94,13 +94,13 @@ def pp_gpgga():
         index += 1
 
     print ("\n\n|---------- GPGGA Sentence: Satellite Status ----------|\n")
-    print(" Time to First Fix:".ljust(35) + str(GLOBAL_VARS.ttff))
-    print(" Longitude:".ljust(35) + str(lon))
-    print(" Latitude:".ljust(35) + str(lat))
-    print(" Number of Satellites Used:".ljust(35) + str(num_of_sats))
-    print(" Horizontal Dilution of Position:".ljust(35) + str(hdop))
-    print(" Altitude (m):".ljust(35) + str(alt))
-    print(" Geoid Height:".ljust(35) + str(geoid_height))
+    print(" Time to First Fix:                  " + str(GLOBAL_VARS.ttff))
+    print(" Longitude:                          " + str(lon))
+    print(" Latitude:                           " + str(lat))
+    print(" Number of Satellites Used:          " + str(num_of_sats))
+    print(" Horizontal Dilution of Position:    " + str(hdop))
+    print(" Altitude (m):                       " + str(alt))
+    print(" Geoid Height:                       " + str(geoid_height))
     print ("\n|------------------------------------------------------|\n\n")
 
 def pp_gpgsa():
@@ -144,11 +144,11 @@ def pp_gpgsa():
     sats_str = sats_str.replace("]", '') 
 
     print ("\n\n|----- GPGSA Sentence: Global Positioning System Fix Data -----|\n")
-    print(" Fix Type:".ljust(35) + str(fix_type))
-    print(" Number of Satellites in View:".ljust(35) + str(sats_str))
-    print(" Dilution of Precision:".ljust(35) + str(pdop))
-    print(" Horizontal Dilution of Precision:".ljust(35) + str(hdop))
-    print(" Vertical Dilution of Precision:".ljust(35) + str(vdop))
+    print(" Fix Type:                           " + str(fix_type))
+    print(" Number of Satellites in View:       " + str(sats_str))
+    print(" Dilution of Precision:              " + str(pdop))
+    print(" Horizontal Dilution of Precision:   " + str(hdop))
+    print(" Vertical Dilution of Precision:     " + str(vdop))
     print ("\n|--------------------------------------------------------------|\n\n")
 
 def pp_gpgsv():
@@ -178,12 +178,12 @@ def pp_gpgsv():
 
     sat_index = 0;
     print ("\n\n|----------- GPGSV Sentence: Satellites in View -----------|\n")
-    print(" Number of Satellites in View:".ljust(35) + str(num_of_sats_in_view))
+    print(" Number of Satellites in View:       " + str(num_of_sats_in_view))
     while sat_index < len(sat_info):
-        print ("\n Satellite PRN number:".ljust(35) + sat_info[sat_index])
-        print (" Azimuth (deg):".ljust(35) + sat_info[sat_index+1])
-        print (" Signal to Noise Ratio (SNR):".ljust(35) + sat_info[sat_index+2])
-        print (" Elevation (deg):".ljust(35) + sat_info[sat_index+3])
+        print ("\n Satellite PRN number:              " + sat_info[sat_index])
+        print (" Azimuth (deg):                     " + sat_info[sat_index+1])
+        print (" Signal to Noise Ratio (SNR):       " + sat_info[sat_index+2])
+        print (" Elevation (deg):                   " + sat_info[sat_index+3])
         sat_index += 4
     print ("\n|----------------------------------------------------------|\n\n")
 
@@ -209,11 +209,11 @@ def pp_gprmc():
         index += 1
 
     print ("\n\n|----- GPRMC Sentence: Recommended Minimum sentence C -----|\n")
-    print(" Latitude:".ljust(35) + str(lat))
-    print(" Latitude:".ljust(35) + str(lon))
-    print(" Speed Over the Ground (knots):".ljust(35) + str(speed_over_ground))
-    print(" Track Angle (deg):".ljust(35) + str(track_angle))
-    print(" Date:".ljust(35) + format_date(date))
+    print(" Latitude:                           " + str(lat))
+    print(" Latitude:                           " + str(lon))
+    print(" Speed Over the Ground (knots):      " + str(speed_over_ground))
+    print(" Track Angle (deg):                  " + str(track_angle))
+    print(" Date:                               " + format_date(date))
     print ("\n|-----------------------------------------------------------|\n\n")
 
 def pp_gpvtg():
@@ -236,9 +236,9 @@ def pp_gpvtg():
         index += 1
 
     print ("\n\n|---- GPVTG Sentence: Track Made Good and Ground Speed -----|\n")
-    print(" True Track Made Good (deg):".ljust(35) + str(true_track))
-    print(" Ground speed (knots):".ljust(35) + str(ground_speed_knots))
-    print(" Ground speed (kph):".ljust(35) + str(ground_speed_knots))
+    print(" True Track Made Good (deg):         " + str(true_track))
+    print(" Ground speed (knots):               " + str(ground_speed_knots))
+    print(" Ground speed (kph):                 " + str(ground_speed_knots))
     print ("\n|-----------------------------------------------------------|\n\n")
 
 if __name__ == '__main__':
