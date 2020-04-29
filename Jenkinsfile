@@ -11,14 +11,14 @@ node {
 
         stage('Pylint: SW Metrics') {
             sh '''#!/bin/bash
-                  pylint add.py
+                  pylint hwil_gps_v002.py
                   echo "pylint complete"
             '''
         }
 
         stage('Unit Test') {
             sh '''#!/bin/bash
-                  python3 -m unittest test_add.py
+                  #python3 -m unittest test_add.py
                   echo "Unittest complete"
             '''
             echo "Unit Test Complete"
@@ -27,7 +27,8 @@ node {
         stage('HWIL') {
             echo "Hardware in the Loop Testing complete"
             sh '''#!/bin/bash
-                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 test1.py
+                  python3 pyboard.py --device /dev/tty.hwil_gps_v002 test1.py
+                  python3 pyboard.py --device /dev/tty.hwil_gps_v002 post_process_logs.py
             '''
         }
 
