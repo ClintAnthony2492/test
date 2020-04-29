@@ -18,7 +18,7 @@ node {
 
         stage('Unit Test') {
             sh '''#!/bin/bash
-                  python3 -m unittest test_format_date.py
+                  python3 -m unittest -v test_format_date.py
                   echo "Unittest complete"
             '''
             echo "Unit Test Complete"
@@ -37,6 +37,8 @@ node {
         stage('Post-Process & Analysis') {
             sh '''#!/bin/bash
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 post_process_logs.py
+                  sleep 5
+                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 send_standby.py
             '''
             echo "Post-Process and Analysis complete"
         }
