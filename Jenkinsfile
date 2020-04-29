@@ -83,9 +83,9 @@ node {
 
     finally {
         stage('Email Notify') {
-            emailext body: "GitHub PULL: ${GitHub_Pull} \n Pylint: SW Metrics: ${Pylint_SW_Metrics} \n \
-                            Unit Test: ${Unit_Test} \n HWIL: ${HWIL_Test}  \n Post-Process & Analysis: ${Post_Process}"
-                            , to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
+            emailext body: "GitHub PULL: ${GitHub_Pull} Pylint: SW Metrics: ${Pylint_SW_Metrics} \
+                     Unit Test: ${Unit_Test} HWIL: ${HWIL_Test} Post-Process & Analysis: ${Post_Process}", 
+                     to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
         }
     }
 }
