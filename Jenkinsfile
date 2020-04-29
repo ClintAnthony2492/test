@@ -26,7 +26,7 @@ node {
 
         stage('HWIL') {
             sh '''#!/bin/bash
-                  #python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps_v002.py
+                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps_v002.py
                   sleep 10
             '''
             echo "Hardware in the Loop Testing complete"

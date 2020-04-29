@@ -108,15 +108,12 @@ def pp_gpgsv():
 
     while index < len(data):
         if int(data[index][0]) > GLOBAL_VARS.ttff:
-            if int(data[index][2]) == 3:
+            if int(data[index][2]) == 2:
                 num_of_sats_in_view = int(data[index][4])
-
                 for sat_index in range(5, 21):
                     sat_info.append(data[index][sat_index])
-                for sat_index in range(5, 21):
-                    sat_info.append(data[index+1][sat_index])
                 for sat_index in range(5, ((num_of_sats_in_view % 4) * 4 + 5)):
-                    sat_info.append(data[index+2][sat_index])
+                    sat_info.append(data[index+1][sat_index])
 
                 break
         index += 1
