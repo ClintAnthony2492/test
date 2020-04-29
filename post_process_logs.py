@@ -1,9 +1,9 @@
-#import input_commands as command
-#import pyb
+import input_commands as command
+import pyb
 import os
-from enum import Enum
-#command.send_command("standby")
-#pyb.LED(1).toggle()
+
+command.send_command("standby")
+pyb.LED(1).toggle()
 
 class globals:
     ttff = 0
