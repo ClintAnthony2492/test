@@ -1,60 +1,59 @@
 node {
 
-    Test_Result = 'SUCCESSFUL'
-    GitHub_Pull = 'FAIL'
-    Pylint_SW_Metrics = 'FAIL'
-    GitHubPull = 'FAIL'
-    Unit_Test = 'FAIL'
-    HWIL_Test = 'FAIL'
-    Post_Process = 'FAIl'
-
+    Test_Result = 'PASS'
 
     try {
-       
+
         stage('GitHub Pull') { 
+            echo "----------------------------------------------------------------------"
+            echo "GitHub Pull in proress..."
+            echo "----------------------------------------------------------------------"
             // Get Code from GitHub
             step([$class: 'WsCleanup'])
             git 'https://github.com/ClintAnthony2492/test'
-            GitHub_Pull = 'PASS'
+
+            echo "GitHub Pull Complete"
         }
 
         stage('Pylint: SW Metrics') {
+            echo "----------------------------------------------------------------------"
+            echo "Pylint: Software Metrics in proress..."
+            echo "----------------------------------------------------------------------"
             sh '''#!/bin/bash
-                  pylint hwil_gps_v002.py
-                  echo "pylint complete"
+                  pylint hwil_gps.py
             '''
-            Pylint_SW_Metrics = 'PASS'
+            echo "Pylint: SW Metrics Complete"
         }
 
         stage('Unit Test') {
-            sh '''#!/bin/bash
-                  python3 -m unittest -v test_format_date.py
-                  echo "Unittest complete"
-            '''
-            echo "Unit Test Complete"
-            Unit_Test = 'PASS'
+            echo "----------------------------------------------------------------------"
+            echo "Unit Testing in proress..."
+            echo "----------------------------------------------------------------------"
+
+            echo "Unit Test is not implemented"
         }
 
         stage('HWIL') {
+            echo "----------------------------------------------------------------------"
+            echo "Hardware in the Loop Testing in proress..."
+            echo "----------------------------------------------------------------------"
+
             sh '''#!/bin/bash
-                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps_v002.py
+                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps.py
                   sleep 10
             '''
-            echo "Necessary Board Reset"
-
+            echo "Necessary Board Reset..."
+            
             echo "Hardware in the Loop Testing complete"
-            HWIL_Test = 'PASS'
+        }
+        stage('Post-Process & Analysis') {
+            echo "----------------------------------------------------------------------"
+            echo "Post-Process & Analysis' in proress..."
+            echo "----------------------------------------------------------------------"
+
+            echo "Post-Process & Analysis is not implemented"
         }
 
-        stage('Post-Process & Analysis') {
-            sh '''#!/bin/bash
-                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 post_process_logs.py
-                  sleep 5
-                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 send_standby.py
-            '''
-            echo "Post-Process and Analysis complete"
-            Post_Process = 'PASS'
-        }
 
     } catch(err) {
         Test_Result = 'FAILED'
@@ -63,9 +62,10 @@ node {
 
     finally {
         stage('Email Notify') {
-            emailext attachLog: true, body: "GitHub PULL:    ${GitHub_Pull}\nPylint SW Metrics:    ${Pylint_SW_Metrics} \
-                     \nUnit Test:    ${Unit_Test} \nHWIL:    ${HWIL_Test} \nPost-Process & Analysis:    ${Post_Process}", 
-                     to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
+            emailext attachLog: true, body: "This is an automated email by Jenkins. \n\
+            A Jenkins pipeline has been triggerd from a repository change. \
+            It coducted a pipeline test on MicroPython Pyboard GPS Project \
+            See build.log attached for results.", to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
         }
     }
 }
