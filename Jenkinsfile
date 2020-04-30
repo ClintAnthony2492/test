@@ -62,7 +62,11 @@ node {
             sh '''#!/bin/bash
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps.py
             '''
-            echo "Necessary Board Reset"
+            // Need to reset pyboard to get log files
+            sh '''#!/bin/bash
+                  python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 reset_board.py
+                  echo "Necessary Board Reset..."
+            '''
 
             echo "Hardware in the Loop Testing complete"
             HWIL_Test = 'PASS'

@@ -7,7 +7,6 @@ from micropyGPS import MicropyGPS
 import pyb
 import input_commands as command
 from pyb import UART
-import machine
 
 # Setup the connection to your GPS here
 # This example uses UART 3 with RX on pin Y10
@@ -223,4 +222,3 @@ if __name__ == '__main__':
 
     GPS_PARSE.generate_logs()
     sleep(3.0)
-    machine.reset()
