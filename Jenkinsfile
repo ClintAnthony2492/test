@@ -16,6 +16,7 @@ node {
         }
 
         stage('Pylint: SW Metrics') {
+            try {
             echo "----------------------------------------------------------------------"
             echo "Pylint: Software Metrics in progress..."
             echo "----------------------------------------------------------------------"
@@ -23,6 +24,9 @@ node {
                   pylint hwil_gps.py
             '''
             echo "Pylint: SW Metrics Complete"
+            } catch(err) {
+                echo "<FAIL> Pylint FAILED"
+            }
         }
 
         stage('Unit Test') {
