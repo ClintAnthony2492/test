@@ -46,7 +46,7 @@ node {
             // Need to utilize bash shell to call python3 
             sh '''#!/bin/bash
                   python3 -m unittest -v test_format_date.py
-                  echo "Unittest complete"
+                  echo "Unittest on test_format_date.py complete"
             '''
             echo "Unit Test Complete"
             Unit_Test = 'PASS'
@@ -61,8 +61,11 @@ node {
             // Need to utilize bash shell to call python3 
             sh '''#!/bin/bash
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps.py
+            '''
+            sh '''#!/bin/bash
                   sleep 10
             '''
+
             echo "Necessary Board Reset"
 
             echo "Hardware in the Loop Testing complete"
