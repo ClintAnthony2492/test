@@ -218,6 +218,8 @@ if __name__ == '__main__':
         GPS_PARSE.parse_gps_sentence()
 
     command.send_command("standby")
+    pyb.LED(2).off()
+    pyb.LED(4).on()
 
     GPS_PARSE.generate_logs()
     sleep(3.0)
