@@ -62,10 +62,6 @@ node {
             sh '''#!/bin/bash
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 hwil_gps.py
             '''
-            sh '''#!/bin/bash
-                  sleep 10
-            '''
-
             echo "Necessary Board Reset"
 
             echo "Hardware in the Loop Testing complete"
@@ -80,6 +76,7 @@ node {
             echo "----------------------------------------------------------------------"
             // Need to utilize bash shell to call python3 
             sh '''#!/bin/bash
+                  sleep 10
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 post_process_logs.py
                   sleep 5
                   python3 pyboard.py --device /dev/tty.usbmodem2085348F344D2 send_standby.py
