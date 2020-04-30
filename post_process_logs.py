@@ -248,11 +248,10 @@ def TTFF_test():
     if GLOBAL_VARS.ttff < 60:
         test_results = 'PASS'
 
-    print ("\n\n|----------------------------------------------------------|\n")
-    print ("\n\n|------------ Test Results: Time to First Fix: ------------|\n")
+    print ("\n\n|~~~~~~~~~~~~ Test Results: Time to First Fix: ~~~~~~~~~~~~|\n")
     print (" TTFF                                       " + str(GLOBAL_VARS.ttff) + " seconds")
     print (" Test Results (TTFF under 60 seconds)       " + test_results)
-    print ("\n|---------------------------------------------------------|\n\n")
+    print ("\n|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|\n\n")
 
 if __name__ == '__main__':
     GLOBAL_VARS = globals()
