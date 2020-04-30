@@ -66,10 +66,10 @@ node {
 
     finally {
         stage('Email Notify') {
-            emailext attachLog: true, body: "This is an automated email by Jenkins. \n\
-            A Jenkins pipeline has been triggerd from a repository change. \
-            It coducted a pipeline test on MicroPython Pyboard GPS Project \
-            See build.log attached for results.", to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
+            emailext attachLog: true, body: "This is an automated email by Jenkins. \
+            \nA Jenkins pipeline has been triggerd from a repository change. \
+            \nIt coducted a pipeline test on MicroPython Pyboard GPS Project. \
+            \nSee build.log attached for results.", to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
         }
     }
 }
