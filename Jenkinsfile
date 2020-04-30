@@ -6,7 +6,7 @@ node {
 
         stage('GitHub Pull') { 
             echo "----------------------------------------------------------------------"
-            echo "GitHub Pull in proress..."
+            echo "GitHub Pull in progress..."
             echo "----------------------------------------------------------------------"
             // Get Code from GitHub
             step([$class: 'WsCleanup'])
@@ -17,7 +17,7 @@ node {
 
         stage('Pylint: SW Metrics') {
             echo "----------------------------------------------------------------------"
-            echo "Pylint: Software Metrics in proress..."
+            echo "Pylint: Software Metrics in progress..."
             echo "----------------------------------------------------------------------"
             sh '''#!/bin/bash
                   pylint hwil_gps.py
@@ -27,7 +27,7 @@ node {
 
         stage('Unit Test') {
             echo "----------------------------------------------------------------------"
-            echo "Unit Testing in proress..."
+            echo "Unit Testing in progress..."
             echo "----------------------------------------------------------------------"
 
             echo "Unit Test is not implemented"
@@ -35,7 +35,7 @@ node {
 
         stage('HWIL') {
             echo "----------------------------------------------------------------------"
-            echo "Hardware in the Loop Testing in proress..."
+            echo "Hardware in the Loop Testing in progress..."
             echo "----------------------------------------------------------------------"
 
             sh '''#!/bin/bash
@@ -48,7 +48,7 @@ node {
         }
         stage('Post-Process & Analysis') {
             echo "----------------------------------------------------------------------"
-            echo "Post-Process & Analysis' in proress..."
+            echo "Post-Process & Analysis' in progress..."
             echo "----------------------------------------------------------------------"
 
             echo "Post-Process & Analysis is not implemented"
