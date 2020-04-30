@@ -1,3 +1,4 @@
+//Build 002
 node {
 
     Test_Result = 'SUCCESSFUL'
@@ -63,5 +64,6 @@ node {
             \nA Jenkins pipeline has been triggerd from a repository change. \
             \nIt coducted a pipeline test on MicroPython Pyboard GPS Project. \
             \nSee build.log attached for results.", to: 'ant.dg24@gmail.com', subject: "Test Results: ${Test_Result}"
+        }
     }
 }
