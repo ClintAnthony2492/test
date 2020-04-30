@@ -22,6 +22,7 @@ node {
             echo "----------------------------------------------------------------------"
             sh '''#!/bin/bash
                   pylint hwil_gps.py
+                  echo "pylint complete"
             '''
             echo "Pylint: SW Metrics Complete"
         }
