@@ -48,7 +48,7 @@ node {
         }
         stage('Post-Process & Analysis') {
             echo "----------------------------------------------------------------------"
-            echo "Post-Process & Analysis' in progress..."
+            echo "Post-Process & Analysis' in progress... "
             echo "----------------------------------------------------------------------"
 
             echo "Post-Process & Analysis is not implemented"
