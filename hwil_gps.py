@@ -1,5 +1,5 @@
 """
-This python script ...
+Part of build003
 """
 import time
 from time import sleep
@@ -196,29 +196,47 @@ LOG = LogHeaders()
 
 
 if __name__ == '__main__':
-    NAVIGATION_TIME_DURATION = 10 #5 seconds
+    
+    #Initialize duration time in naviagation mode (seconds)
+    NAVIGATION_TIME_DURATION = 10 
 
+    #Send cold start command to the GPS module
     command.send_command("cold_start")
     #command.send_command("warm_start")
 
-    pyb.LED(1).on() #Turn on Red LED: GPS Module is in ACQUISITION MODE
+    #Turn on Red LED: GPS Module is in ACQUISITION MODE
+    pyb.LED(1).on() 
 
+    #Save Start Time
     START_TIME = time.time()
+
+    #Loop until GPS is gets first fix (tacks satalites) 
+    #and is in NAVIGATION MODE. This also logs the GPS Sentences
+    #into a aray and prints out to screen
     while GPS_PARSE.fix_data == "no_fix":
         GPS_PARSE.parse_gps_sentence()
 
+
     print("GPS FIX: GPS Satallites and Navigation Acquired...")
 
+    #Turn on GREEN LED: GPS Module is in NAVIGATION MODE
     pyb.LED(1).off()
     pyb.LED(2).on()
 
+    #In NAVIGATION MODE, log for declared time duration
     T_END = time.time() + NAVIGATION_TIME_DURATION
     while time.time() < T_END:
         GPS_PARSE.parse_gps_sentence()
 
+    #Send standby mode comment to the GPS module  
     command.send_command("standby")
+
+    #Turn on BLUE LED: GPS Module is in Standby MODE
     pyb.LED(2).off()
     pyb.LED(4).on()
 
+    #Parse data and generate lofs by writing to individual csv file 
     GPS_PARSE.generate_logs()
+
+    #Sleeps
     sleep(3.0)
